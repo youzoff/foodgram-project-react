@@ -13,9 +13,7 @@ services:
       - pg_data_volume:/var/lib/postgresql/data
 
   backend:
-    build:
-      context: ../backend/
-      dockerfile: Dockerfile
+    image: youzoff/foodgram_backend
     env_file: ../.env
     volumes:
       - static_volume:/backend_static/
@@ -24,15 +22,13 @@ services:
       - db
 
   frontend:
-    build:
-      context: ../frontend/
-      dockerfile: Dockerfile
+    image: youzoff/foodgram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static/
 
   nginx:
-    image: nginx:1.19.3
+    image: youzoff/foodgram_gateway
     ports:
       - 8000:80
     volumes:
