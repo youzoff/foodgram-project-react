@@ -14,9 +14,7 @@ SECRET_KEY = os.getenv('DJANGO_TOKEN', 'django')
 
 DEBUG = eval(os.getenv('DJANGO_DEBUG', 'True'))
 
-ALLOWED_HOSTS = os.getenv(
-    'DJANGO_HOSTS'
-).split(', ')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
