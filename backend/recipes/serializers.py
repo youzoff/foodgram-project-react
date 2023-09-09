@@ -6,6 +6,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
 from users.serializers import CustomUserSerializer
+
 from .models import (
     Favorite, Ingredient, Recipe,
     RecipeIngredient, ShoppingCart, Tag
