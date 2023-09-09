@@ -2,7 +2,7 @@ name: Main FoodGram Workflow
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   # Запуск тестирования backend
   backend_tests:
