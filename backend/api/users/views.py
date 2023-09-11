@@ -9,12 +9,15 @@ from rest_framework.response import Response
 
 from api.paginators import PageNumberLimitPagination
 from users.models import Subscription
-from users.serializers import SubscriptionSerializer
+from .serializers import SubscriptionSerializer
 
 User = get_user_model()
 
 
 class CustomUserViewSet(UserViewSet):
+    """
+    User view
+    """
     pagination_class = PageNumberLimitPagination
 
     @action(

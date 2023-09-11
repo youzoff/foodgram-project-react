@@ -1,18 +1,27 @@
 """
 Django settings for foodgram project.
 """
+import environ
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
-
-load_dotenv()
+env = environ.Env(
+    DJANGO_TOKEN=(str, 'django'),
+    DEBUG=(bool, False),
+    POSTGRES_DB=(str, 'django'),
+    POSTGRES_USER=(str, 'django'),
+    POSTGRES_PASSWORD=(str, 'pass1'),
+    DB_HOST=(str, 'db'),
+    DB_PORT=(int, 5432)
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('DJANGO_TOKEN', 'django')
+environ.Env.read_env(os.path.join(BASE_DIR, '../.env'))
 
-DEBUG = eval(os.getenv('DJANGO_DEBUG', 'True'))
+SECRET_KEY = env('DJANGO_TOKEN',)
+
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -73,21 +82,14 @@ WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 # Database
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'django'),
-        'USER': os.getenv('POSTGRES_USER', 'django'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'pass1'),
-        'HOST': os.getenv('DB_HOST', 'db'),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT')
     }
 }
 
@@ -165,8 +167,14 @@ DJOSER = {
         'user': ['rest_framework.permissions.AllowAny']
     },
     'SERIALIZERS': {
-        'user_create': 'users.serializers.CustomUserCreateSerializer',
-        'user': 'users.serializers.CustomUserSerializer',
-        'current_user': 'users.serializers.CustomUserSerializer',
+        'user_create': 'api.users.serializers.CustomUserCreateSerializer',
+        'user': 'api.users.serializers.CustomUserSerializer',
+        'current_user': 'api.users.serializers.CustomUserSerializer',
     },
 }
+
+# Constants
+CHAR_FIELD_MAX_LENGTH = 200
+COLOR_MAX_LENGTH = 7
+MIN_TIME_VALUE = 1
+AMOUNT_MIN_VALUE = 1

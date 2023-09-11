@@ -5,12 +5,15 @@ from rest_framework import serializers
 
 from recipes.models import Recipe
 
-from .models import Subscription
+from users.models import Subscription
 
 User = get_user_model()
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
+    """
+    User create serializer
+    """
     class Meta:
         model = User
         fields = (
@@ -20,6 +23,9 @@ class CustomUserCreateSerializer(UserCreateSerializer):
 
 
 class CustomUserSerializer(UserSerializer):
+    """
+    User view serializer
+    """
     is_subscribed = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -33,11 +39,14 @@ class CustomUserSerializer(UserSerializer):
         user = self.context['request'].user
         return bool(
             user.is_authenticated
-            and Subscription.objects.filter(user=user, author=obj).exists()
+            and obj.subscribed.filter(user=user).exists()
         )
 
 
 class RecipeSubscriptionSerializer(serializers.ModelSerializer):
+    """
+    Show recipe in subscription serializer
+    """
     image = Base64ImageField(read_only=True)
     name = serializers.ReadOnlyField()
     cooking_time = serializers.ReadOnlyField()
@@ -48,6 +57,9 @@ class RecipeSubscriptionSerializer(serializers.ModelSerializer):
 
 
 class SubscriptionSerializer(CustomUserSerializer):
+    """
+    Subscription serializer
+    """
     recipes_count = serializers.ReadOnlyField(
         source='author.recipes.count'
     )
@@ -64,6 +76,9 @@ class SubscriptionSerializer(CustomUserSerializer):
         read_only_fields = fields
 
     def get_recipes(self, obj):
+        """
+        Get recipes from the author the user is subscribed to
+        """
         request = self.context.get('request')
         recipes_limit = (
             request.parser_context['request'].

@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser):
+    """
+    Custom user model.
+    """
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
@@ -24,6 +27,10 @@ class CustomUser(AbstractUser):
 
 
 class Subscription(models.Model):
+    """
+    Subscription model.
+    """
+
     user = models.ForeignKey(
         CustomUser,
         verbose_name=_('subscriber'),

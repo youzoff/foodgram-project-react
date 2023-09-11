@@ -44,9 +44,6 @@ def load_ingredients_data(ingredient_data):
     for row in ingredient_data:
         ingredient_name = row['name']
         measurement_unit = row['unit']
-        pk = Ingredient.objects.all().count() + 1
         ingredient, _ = Ingredient.objects.get_or_create(
-            id=pk,
             name=ingredient_name, measurement_unit=measurement_unit
         )
-        pk += 1

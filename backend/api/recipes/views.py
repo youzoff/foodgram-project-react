@@ -12,8 +12,7 @@ from api.filters import IngredientFilter, RecipeFilter
 from api.paginators import PageNumberLimitPagination
 from api.permissions import IsAuthorOrAdminOrReadOnly
 from core.utils import get_shopping_list_pdf
-
-from .models import (
+from recipes.models import (
     Favorite, Ingredient, Recipe,
     RecipeIngredient, ShoppingCart, Tag
 )
@@ -25,12 +24,18 @@ from .serializers import (
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Tag view
+    """
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     pagination_class = None
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Ingredient view
+    """
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     pagination_class = None
@@ -39,6 +44,9 @@ class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
+    """
+    Recipe view
+    """
     queryset = Recipe.objects.all()
     permission_classes = (IsAuthorOrAdminOrReadOnly,)
     pagination_class = PageNumberLimitPagination
@@ -58,6 +66,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             recipe, context={"request": request}
         )
         class_obj = kwargs['class']
+
         if request.method == 'POST':
             if class_obj.objects.filter(user=user, recipe=recipe).exists():
                 return Response(

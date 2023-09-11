@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 
 from users.models import CustomUser, Subscription
 
+# Delete Group from admin panel
 admin.site.unregister(Group)
 
 
