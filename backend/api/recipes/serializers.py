@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
+from api.users.serializers import CustomUserSerializer
 from foodgram import settings
 from foodgram.settings import AMOUNT_MIN_VALUE, MIN_TIME_VALUE
-from api.users.serializers import CustomUserSerializer
 from recipes.models import (
     Favorite, Ingredient, Recipe,
     RecipeIngredient, ShoppingCart, Tag
