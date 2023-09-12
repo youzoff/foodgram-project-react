@@ -7,7 +7,7 @@ from pathlib import Path
 
 env = environ.Env(
     DJANGO_TOKEN=(str, 'django'),
-    DEBUG=(bool, False),
+    DJANGO_DEBUG=(bool, False),
     POSTGRES_DB=(str, 'django'),
     POSTGRES_USER=(str, 'django'),
     POSTGRES_PASSWORD=(str, 'pass1'),
