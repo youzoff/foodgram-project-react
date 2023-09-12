@@ -8,6 +8,7 @@ from pathlib import Path
 env = environ.Env(
     DJANGO_TOKEN=(str, 'django'),
     DJANGO_DEBUG=(bool, False),
+    DJANGO_HOSTS=(str, '127.0.0.1,localhost'),
     POSTGRES_DB=(str, 'django'),
     POSTGRES_USER=(str, 'django'),
     POSTGRES_PASSWORD=(str, 'pass1'),
@@ -23,7 +24,7 @@ SECRET_KEY = env('DJANGO_TOKEN')
 
 DEBUG = env('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('DJANGO_HOSTS')
 
 
 # Application definition
