@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
-from recipes.models import Ingredient, Recipe, Tag
+from recipes.models import Ingredient, Tag
 
 
 def fetch_pdf_resources(uri, rel):
