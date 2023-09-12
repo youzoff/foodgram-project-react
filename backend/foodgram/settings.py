@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 environ.Env.read_env(os.path.join(BASE_DIR, '../.env'))
 
-SECRET_KEY = env('DJANGO_TOKEN',)
+SECRET_KEY = env('DJANGO_TOKEN')
 
 DEBUG = env('DJANGO_DEBUG')
 
