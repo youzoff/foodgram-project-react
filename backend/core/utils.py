@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
-from recipes.models import Ingredient
+from recipes.models import Ingredient, Recipe, Tag
 
 
 def fetch_pdf_resources(uri, rel):
@@ -43,7 +43,18 @@ def get_shopping_list_pdf(template_src, context_dict=None):
 def load_ingredients_data(ingredient_data):
     for row in ingredient_data:
         ingredient_name = row['name']
-        measurement_unit = row['unit']
+        measurement_unit = row['measurement_unit']
         ingredient, _ = Ingredient.objects.get_or_create(
             name=ingredient_name, measurement_unit=measurement_unit
+        )
+
+
+@transaction.atomic
+def load_tags_data(tags_data):
+    for row in tags_data:
+        tag_name = row['name']
+        tag_color = row['color']
+        tag_slug = row['slug']
+        tag, _ = Tag.objects.get_or_create(
+            name=tag_name, color=tag_color, slug=tag_slug
         )

@@ -134,7 +134,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSV_PATH = os.path.join(BASE_DIR, 'static/data/ingredients.csv')
+CSV_PATH = os.path.join(BASE_DIR, 'static/data')
 JSON_PATH = os.path.join(BASE_DIR, 'static/data/ingredients.json')
 
 # Default primary key field type
@@ -178,3 +178,27 @@ CHAR_FIELD_MAX_LENGTH = 200
 COLOR_MAX_LENGTH = 7
 MIN_TIME_VALUE = 1
 AMOUNT_MIN_VALUE = 1
+
+TEST_USERS = (
+    {
+        'username': 'guitarist',
+        'email': 'usermail1@ya.ru',
+        'firstname': 'Billy',
+        'lastname': 'Armstrong',
+        'password': 'Strong1Password'
+    },
+    {
+        'username': 'bassist',
+        'email': 'usermail2@ya.ru',
+        'firstname': 'Mike',
+        'lastname': 'Dirnt',
+        'password': 'Strong1Password'
+    },
+    {
+        'username': 'drummer',
+        'email': 'usermail3@ya.ru',
+        'firstname': 'Tre',
+        'lastname': 'Cool',
+        'password': 'Strong1Password'
+    }
+)
