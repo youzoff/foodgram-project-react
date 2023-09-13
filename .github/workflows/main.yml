@@ -1,4 +1,4 @@
-name: Main FoodGram Workflow
+name: FoodGram_Workflow
 on:
   push:
     branches:
