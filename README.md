@@ -20,6 +20,13 @@ FoodGram - онлайн-сервис, по поиску и созданию ку
 подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список избранного,
 а также скачивать сводный список продуктов в формате pdf.
 
+## Развернутое приложение
+### Ссылка на развернутое приложение <br> https://myfood.webhop.me
+### Админ зона
+```angular2html
+login: admin@adminmail.ru
+password: Strong1Password
+```
 ## Подготовка сервера и деплой проекта
 
 1. Создать директорию foodgram/ в домашней директории сервера.
@@ -95,9 +102,12 @@ FoodGram - онлайн-сервис, по поиску и созданию ку
 ## Документация
 С примерами запросов можно ознакомиться в [Документации](http://localhost/api/redoc/)
 
-<div align=center>
+
 
 ## Контакты
+Автор проекта: Юзов Кирилл
+<br>
+<div align=center>
 
 [![Telegram Badge](https://img.shields.io/badge/-youzoff-blue?style=social&logo=telegram&link=https://t.me/youzoff)](https://t.me/dkushlevich) [![ Badge](https://img.shields.io/badge/-k.yuzov@yandex.ru-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:k.yuzov@yandex.ru)](mailto:k.yuzov@yandex.ru)
 
