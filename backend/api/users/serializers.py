@@ -64,6 +64,12 @@ class SubscriptionSerializer(CustomUserSerializer):
         source='author.recipes.count'
     )
     recipes = serializers.SerializerMethodField()
+    is_subscribed = serializers.SerializerMethodField()
+    id = serializers.ReadOnlyField(source='author.id')
+    username = serializers.ReadOnlyField(source='author.username')
+    email = serializers.ReadOnlyField(source='author.email')
+    first_name = serializers.ReadOnlyField(source='author.first_name')
+    last_name = serializers.ReadOnlyField(source='author.last_name')
 
     class Meta:
         model = Subscription
@@ -84,6 +90,11 @@ class SubscriptionSerializer(CustomUserSerializer):
             request.parser_context['request'].
             query_params.get('recipes_limit')
         )
-        recipes = obj.author.recipes.all()[:int(recipes_limit)]
+        recipes = obj.author.recipes.all()
+        if recipes_limit:
+            recipes = recipes[:int(recipes_limit)]
         serializer = RecipeSubscriptionSerializer(recipes, many=True)
         return serializer.data
+
+    def get_is_subscribed(self, obj):
+        return True
