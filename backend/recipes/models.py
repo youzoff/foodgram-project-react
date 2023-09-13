@@ -179,7 +179,7 @@ class UserRecipe(models.Model):
         abstract = True
 
     def __str__(self):
-        return _(
+        return (
             f'{self.recipe.name} in {self.user.get_username()} '
             + self._meta.verbose_name
         )

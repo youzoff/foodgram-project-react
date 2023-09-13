@@ -60,7 +60,7 @@ class Subscription(models.Model):
         ]
 
     def __str__(self):
-        return _(
+        return (
             self.user.get_username()
             + ' subscribe '
             + self.author.get_username()
