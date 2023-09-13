@@ -1,5 +1,4 @@
-from django.db.models import Sum
-from django.http import HttpResponse
+from django.db.models import F, Sum
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django_filters.rest_framework import DjangoFilterBackend
@@ -11,7 +10,7 @@ from rest_framework.response import Response
 from api.filters import IngredientFilter, RecipeFilter
 from api.paginators import PageNumberLimitPagination
 from api.permissions import IsAuthorOrAdminOrReadOnly
-from core.utils import get_shopping_list_pdf
+from core.utils import get_shopping_cart_pdf
 from recipes.models import (
     Favorite, Ingredient, Recipe,
     RecipeIngredient, ShoppingCart, Tag
@@ -130,7 +129,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             recipe__shoppingcart__user=request.user
         )
         ingredients = recipe_ingredients.values(
-            'ingredient__name', 'ingredient__measurement_unit'
+            name=F('ingredient__name'), unit=F('ingredient__measurement_unit')
         ).annotate(total=Sum('amount'))
 
         if not ingredients:
@@ -139,15 +138,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        context = {
-            'user': request.user,
-            'ingredients': ingredients
-        }
-        pdf = get_shopping_list_pdf(
-            'api/shopping_list_pdf_template.html', context
-        )
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = (
-            f'inline; filename="{request.user.username}_ShoppingCart.pdf"'
-        )
-        return response
+        data = [[q["name"], q["unit"], q["total"]] for q in ingredients]
+        data.insert(0, ["Продукт", "Ед.изм.", "Кол-во"])
+        pdf = get_shopping_cart_pdf(data)
+        return pdf

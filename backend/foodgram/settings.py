@@ -116,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -179,27 +179,3 @@ CHAR_FIELD_MAX_LENGTH = 200
 COLOR_MAX_LENGTH = 7
 MIN_TIME_VALUE = 1
 AMOUNT_MIN_VALUE = 1
-
-TEST_USERS = (
-    {
-        'username': 'guitarist',
-        'email': 'usermail1@ya.ru',
-        'firstname': 'Billy',
-        'lastname': 'Armstrong',
-        'password': 'Strong1Password'
-    },
-    {
-        'username': 'bassist',
-        'email': 'usermail2@ya.ru',
-        'firstname': 'Mike',
-        'lastname': 'Dirnt',
-        'password': 'Strong1Password'
-    },
-    {
-        'username': 'drummer',
-        'email': 'usermail3@ya.ru',
-        'firstname': 'Tre',
-        'lastname': 'Cool',
-        'password': 'Strong1Password'
-    }
-)
